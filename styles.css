@@ -1,0 +1,779 @@
+/* Fresynco Canvas — shared styles for the landing page and legal pages.
+   Palette mirrors the app: coral accent (#FF6B6B), warm "Creation of Adam"
+   fresco stone tones, and charcoal dark surfaces. Self-contained: no external
+   fonts or build step. */
+
+:root {
+  /* App theme */
+  --coral: #ff6b6b; /* app brand accent ("Start drawing" button) */
+  --coral-deep: #e8473f; /* readable coral for links/hover */
+  --charcoal: #1f2224; /* app splash / dark surface */
+  --charcoal-2: #15171a;
+  --stone: #eaddcf; /* fresco parchment (icon fill) */
+  --stone-2: #d8d2c6; /* icon stone border */
+  --parchment: #f5ede3; /* page background */
+
+  /* Aliases used across pages */
+  --ink: #1f2224;
+  --muted: #8a847d;
+  --line: #e6dccf;
+  --surface: #ffffff;
+  --canvas: var(--parchment);
+  --brand: #ff6b6b;
+  --brand-dark: var(--coral-deep);
+  --accent: #ff6b6b;
+  --accent-soft: #fce7df;
+
+  --radius: 16px;
+  --shadow: 0 18px 50px -24px rgba(40, 24, 16, 0.45);
+  --maxw: 1080px;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+
+  /* Scroll-driven hands animation: 0 = far apart, 1 = fingertips meeting.
+     JS updates --p on scroll; defaults to apart (page loads at the top). */
+  --p: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: var(--parchment);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--coral-deep);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Header ---------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(245, 237, 227, 0.82);
+  backdrop-filter: saturate(160%) blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+.brand:hover {
+  text-decoration: none;
+}
+
+.brand .logo {
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border-radius: 7px; /* match the app icon's rounded square */
+  object-fit: cover;
+}
+
+.nav {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  font-size: 0.95rem;
+}
+
+.nav a {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.nav a:hover {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.98rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+
+.btn:hover {
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: var(--coral);
+  color: #fff;
+  box-shadow: 0 12px 26px -10px rgba(255, 107, 107, 0.85);
+}
+
+.btn-primary:hover {
+  background: var(--coral-deep);
+}
+
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.btn-ghost.on-light {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+/* ---------- Hero with scroll-driven hands ---------- */
+
+.hero {
+  position: relative;
+  padding: 0;
+  background: var(--charcoal);
+  color: #fff;
+}
+
+/* The hero is one screen tall and scrolls past like the rest of the page —
+   no pin/freeze. The hands converge as it scrolls (driven by --p). */
+.hero-track {
+  height: auto;
+}
+
+.hero-stage {
+  position: relative;
+  /* Let the hands' soft shadows bleed past the fresco panel into the black
+     section above and the Features fresco below (the horizontal off-screen
+     hands are still clipped by .hero-art's own `overflow: clip`). */
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  /* First a solid black section (text + buttons) that fills the first screen,
+     then a full-height fresco panel where the whole hands meet, then the
+     Features section continues the same fresco below. */
+  background: var(--charcoal);
+}
+
+/* Black section — fills the first screen so the hands start off-screen. */
+.hero-content {
+  min-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Full-height fresco panel: tall enough to show the entire hand image when the
+   two hands meet, before the "A canvas you share" heading scrolls into view. */
+.hero-art {
+  position: relative;
+  flex: none;
+  /* Hug the hands: the hands are sized in vw, so the panel height tracks them in
+     vw too (rather than a vh that drifts on short/tall windows and clips them).
+     0.66 of the hand width leaves a little plaster + shadow room above/below. */
+  min-height: calc(min(52vw, 760px) * 0.66);
+  /* `clip` (not `hidden`) so the hands' soft shadows can spill ~30px past the
+     top/bottom edges onto the continuous fresco instead of being cut, while the
+     hands sliding in from the sides are still clipped off-screen. */
+  overflow: clip;
+  overflow-clip-margin: 30px;
+  /* Fixed so the fresco reads as one continuous backdrop shared with the
+     Features section below (no seam between the two). */
+  background-image: url("assets/fresynco_background.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* No glow at the meeting point — the hands simply converge. */
+.spark {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  width: 42vmin;
+  height: 42vmin;
+  transform: translate(-50%, -50%) scale(calc(0.55 + var(--p) * 0.7));
+  background: radial-gradient(
+    circle,
+    rgba(255, 224, 178, 0.9) 0%,
+    rgba(255, 138, 110, 0.5) 28%,
+    rgba(255, 107, 107, 0) 65%
+  );
+  opacity: calc((var(--p) - 0.55) * 3.2);
+  pointer-events: none;
+  filter: blur(2px);
+}
+
+.hand {
+  position: absolute;
+  top: 50%;
+  width: 52vw;
+  max-width: 760px;
+  /* Paint above the sticky header (z-index 20) so its translucent strip never
+     covers the tops of the arms when the fresco panel reaches the top. None of
+     the hands' ancestors create a stacking context, so this lifts only the
+     hands — not the black hero text — in the root stacking order. */
+  z-index: 30;
+  /* Soft, low-contrast shadow so the hands read as painted into the fresco
+     rather than floating cut-outs (a heavier shadow shows a boxy halo). */
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.22));
+  will-change: transform;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Adam's relaxed hand enters from the left; fingertips reach toward center.
+   At rest (--p:1) the fingertip stops just short of center, leaving the iconic
+   "spark of life" gap rather than overlapping the other hand. */
+.hand-adam {
+  right: 50%;
+  /* Start fully off-screen (right edge past the left edge) and slide in until
+     the fingertip nears center at --p:1, leaving a gap to God's hand. */
+  transform: translate(calc(-3vw - (1 - var(--p)) * 58vw), -50%);
+}
+
+/* God's pointing hand enters from the right; index finger reaches the center.
+   Sits a touch lower than Adam's hand. */
+.hand-god {
+  left: 50%;
+  /* Start fully off-screen on the right, slide in to meet at center. */
+  transform: translate(calc(1vw + (1 - var(--p)) * 58vw), -45%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  /* The black section, sized to its content (auto height in the flex column). */
+  flex: none;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 6vh 24px 5vh;
+}
+
+.hero-content .eyebrow {
+  color: #ffb9a3;
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 5.4vw, 3.6rem);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  margin: 12px 0 14px;
+  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.55);
+}
+
+.hero p.lead {
+  font-size: 1.18rem;
+  color: rgba(255, 255, 255, 0.86);
+  margin: 0 auto 26px;
+  max-width: 40ch;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.55);
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.scroll-hint {
+  margin-top: 26px;
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  /* fade the prompt away as the user scrolls and the hands meet */
+  opacity: calc(1 - var(--p) * 1.6);
+}
+
+.scroll-hint span {
+  display: block;
+  margin-top: 6px;
+  animation: bob 1.8s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--coral);
+  font-weight: 700;
+}
+
+/* ---------- Sections ---------- */
+
+section {
+  padding: 80px 0;
+}
+
+.section-head {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 44px;
+}
+
+.section-head h2 {
+  font-size: clamp(1.7rem, 3.4vw, 2.3rem);
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+}
+
+.section-head p {
+  color: var(--muted);
+  font-size: 1.08rem;
+  margin: 0;
+}
+
+/* Features shares the hero's fresco: the converging hands sit just above it and
+   the heading + cards rest over the same plaster. */
+#features {
+  position: relative;
+  background-color: var(--parchment);
+  background-image: url("assets/fresynco_background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Keep the "A canvas you share…" heading (and the rest of Features) layered
+   beneath the hands: the hands sit at z-index 30, so this guarantees the
+   heading renders behind them wherever the two overlap. */
+#features .section-head {
+  position: relative;
+  z-index: 1;
+}
+
+#features .card {
+  box-shadow: var(--shadow);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px;
+}
+
+.card .ico {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(160deg, var(--accent-soft), #fff);
+  margin-bottom: 16px;
+  font-size: 1.4rem;
+}
+
+.card h3 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+}
+
+.card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+/* Two-column platform band */
+.band {
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.two .card {
+  background: var(--parchment);
+}
+
+/* Steps */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  counter-reset: step;
+}
+
+.step {
+  position: relative;
+  padding: 26px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.step::before {
+  counter-increment: step;
+  content: counter(step);
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--coral);
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.step h3 {
+  margin: 0 0 6px;
+  font-size: 1.08rem;
+}
+
+.step p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.96rem;
+}
+
+/* CTA */
+.cta {
+  text-align: center;
+  background:
+    radial-gradient(
+      90% 120% at 50% 0%,
+      rgba(120, 78, 52, 0.5) 0%,
+      rgba(31, 34, 36, 0) 60%
+    ),
+    var(--charcoal);
+  color: #fff;
+  border-radius: 24px;
+  padding: 60px 28px;
+  margin: 0 auto;
+}
+
+.cta h2 {
+  font-size: clamp(1.6rem, 3.4vw, 2.2rem);
+  margin: 0 0 12px;
+}
+
+.cta p {
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0 26px;
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  background: var(--charcoal-2);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 48px 0 36px;
+}
+
+.site-footer .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.site-footer .brand {
+  color: #fff;
+}
+
+.footer-links {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+}
+
+.footer-links a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.copyright {
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 28px;
+  padding-top: 20px;
+  font-size: 0.86rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ---------- Legal / content pages ---------- */
+
+.page {
+  background: var(--parchment);
+}
+
+.doc {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(28px, 5vw, 56px);
+  margin: 48px auto;
+  max-width: 800px;
+}
+
+.doc .eyebrow {
+  color: var(--coral-deep);
+}
+
+.doc h1 {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  letter-spacing: -0.02em;
+  margin: 8px 0 6px;
+}
+
+.doc .updated {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin: 0 0 8px;
+}
+
+.doc h2 {
+  font-size: 1.3rem;
+  margin: 38px 0 10px;
+  letter-spacing: -0.01em;
+}
+
+.doc h3 {
+  font-size: 1.05rem;
+  margin: 24px 0 8px;
+}
+
+.doc p,
+.doc li {
+  color: #34302c;
+  font-size: 1rem;
+}
+
+.doc ul {
+  padding-left: 22px;
+}
+
+.doc li {
+  margin: 6px 0;
+}
+
+.doc hr {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 36px 0;
+}
+
+.toc {
+  background: var(--parchment);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 24px 0 8px;
+}
+
+.toc strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.toc ol {
+  margin: 0;
+  padding-left: 20px;
+  columns: 2;
+}
+
+.callout {
+  background: var(--accent-soft);
+  border: 1px solid #f7cdbf;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 22px 0;
+  font-size: 0.96rem;
+}
+
+.contact-card {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  background: var(--parchment);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin: 18px 0;
+}
+
+.contact-card .ico {
+  font-size: 1.6rem;
+}
+
+/* FAQ */
+.faq details {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 4px 20px;
+  margin: 12px 0;
+}
+
+.faq summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 14px 0;
+  list-style: none;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary::after {
+  content: "+";
+  float: right;
+  color: var(--coral);
+  font-weight: 700;
+}
+
+.faq details[open] summary::after {
+  content: "–";
+}
+
+.faq details p {
+  margin: 0 0 16px;
+  color: var(--muted);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 860px) {
+  /* On narrow screens the hands are wider but everything stays in vw, so the
+     composition scales identically at any phone width. At rest (--p:1) the
+     fingertips stop short of center, leaving a centered "spark" gap — they
+     never overlap — and the full hands read as part of the fresco backdrop
+     (the heading + lead text sit below them) rather than being cropped. */
+  .hand {
+    width: 84vw;
+  }
+  /* Hug the wider mobile hands so there's little empty plaster above/below
+     (the hands are 84vw wide here, so the panel tracks that). */
+  .hero-art {
+    min-height: calc(84vw * 0.66);
+  }
+  .hand-adam {
+    transform: translate(calc(-3vw - (1 - var(--p)) * 60vw), -50%);
+  }
+  .hand-god {
+    transform: translate(calc(3vw + (1 - var(--p)) * 60vw), -52%);
+  }
+  .hero-content {
+    padding-top: 5vh;
+  }
+  .grid,
+  .steps,
+  .two {
+    grid-template-columns: 1fr;
+  }
+  .nav {
+    display: none;
+  }
+  .toc ol {
+    columns: 1;
+  }
+}
+
+/* Respect reduced-motion: pin the hands together and drop the long track. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --p: 1;
+  }
+  .hero-track {
+    height: auto;
+  }
+  .hero-stage {
+    position: static;
+    height: auto;
+  }
+  .hero-content {
+    padding: 96px 24px 64px;
+  }
+  /* (.hero-art keeps the vw-based hug from the base/mobile rules.) */
+  .scroll-hint,
+  .scroll-hint span {
+    display: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
