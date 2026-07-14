@@ -358,10 +358,287 @@ img {
   font-weight: 700;
 }
 
+/* ---------- Phone frame (realistic bezel + side buttons) ---------- */
+
+.phone {
+  position: relative;
+  background: linear-gradient(145deg, #3a3e43 0%, #191b1e 42%, #0b0c0e 100%);
+  border-radius: 15.5% / 7.4%;
+  /* Fixed px (not %) so the bezel is identical regardless of the parent's width
+     — percentage padding is relative to the container, which made the platform
+     phones (in wide cards) get a much thicker frame than the showcase phones. */
+  padding: 4px;
+  box-shadow:
+    0 28px 60px -24px rgba(0, 0, 0, 0.55),
+    0 6px 16px -8px rgba(0, 0, 0, 0.45);
+}
+
+/* Side buttons: power nub on the right, volume rocker + mute on the left. */
+.phone::before {
+  content: "";
+  position: absolute;
+  right: -2px;
+  top: 30%;
+  width: 3px;
+  height: 13%;
+  background: #0c0d0f;
+  border-radius: 0 2px 2px 0;
+}
+
+.phone::after {
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: 19%;
+  width: 3px;
+  height: 6.5%;
+  background: #0c0d0f;
+  border-radius: 2px 0 0 2px;
+  box-shadow: 0 20px 0 #0c0d0f, 0 34px 0 #0c0d0f;
+}
+
+.phone .screen {
+  position: relative;
+  overflow: hidden;
+  border-radius: 13.5% / 6.4%;
+  background: #000;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+.phone .screen > img,
+.phone .screen > video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Phone thumbnail inside the platform cards (same realistic frame, larger). */
+.phone-sm {
+  width: 168px;
+  margin: 0 0 22px;
+}
+
+/* ---------- Live showcase ---------- */
+
+/* Continues the hero's fresco so hands → showcase → features read as one plaster. */
+.showcase {
+  position: relative;
+  padding: 0;
+  background-color: var(--parchment);
+  background-image: url("assets/fresynco_background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.showcase-head {
+  text-align: center;
+  max-width: 680px;
+  padding: 88px 24px 8px;
+}
+
+.showcase-head h2 {
+  font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+  letter-spacing: -0.02em;
+  margin: 10px auto 12px;
+}
+
+.showcase-lead {
+  color: #4a453f;
+  font-size: 1.1rem;
+  margin: 0 auto;
+  max-width: 46ch;
+}
+
+.showcase-track {
+  height: auto;
+}
+
+/* The tools auto-cycle on a timer, so no sticky scroll track is needed. */
+.showcase-stage {
+  position: relative;
+  padding: 16px 0 78px;
+  z-index: 1; /* below the hands (z-index 30), like #features .section-head */
+}
+
+.showcase-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  width: 100%;
+}
+
+/* Frosted caption chip used under every phone. */
+.glass-card {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 14px;
+  box-shadow: 0 10px 26px -14px rgba(40, 24, 16, 0.45);
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* Left column: the tools crossfade as you scroll. */
+.tool-scroll {
+  position: relative;
+  height: min(600px, 66vh);
+  display: grid;
+  place-items: center;
+}
+
+.tool {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding-bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  opacity: 0;
+  /* Screens drift gently left to right and soft-focus in and out: the next
+     eases in from the left, the current drifts off to the right and blurs away. */
+  transform: translateX(-32px) scale(0.94);
+  filter: blur(6px);
+  transition:
+    opacity 1s ease,
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1s ease;
+  pointer-events: none;
+  will-change: opacity, transform, filter;
+}
+
+.tool.active {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  filter: blur(0);
+  pointer-events: auto;
+}
+
+/* The outgoing screen drifts off to the right and blurs out of view. */
+.tool.leaving {
+  opacity: 0;
+  transform: translateX(32px) scale(0.94);
+  filter: blur(6px);
+}
+
+/* Pagination dots make the page changes obvious. */
+.tool-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  z-index: 2;
+}
+
+.tool-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(31, 34, 36, 0.22);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.tool-dots span.active {
+  background: var(--coral);
+  transform: scale(1.35);
+}
+
+.phone-tool {
+  height: min(500px, 54vh);
+  aspect-ratio: 1320 / 2868;
+  width: auto;
+}
+
+.phone-tool .screen {
+  position: absolute;
+  inset: 4px;
+}
+
+.phone-tool .screen > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tool-cap {
+  padding: 10px 18px;
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* Right column: the live demo in its own frosted box. */
+.live-demo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 24px 24px 28px;
+  background: rgba(255, 255, 255, 0.42);
+  backdrop-filter: blur(16px) saturate(135%);
+  -webkit-backdrop-filter: blur(16px) saturate(135%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 26px;
+  box-shadow: var(--shadow);
+}
+
+.demo-item {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+}
+
+.demo-item .phone {
+  width: 124px;
+}
+
+.demo-item .glass-card {
+  padding: 5px 14px;
+  font-size: 0.75rem;
+  letter-spacing: 0.01em;
+}
+
+.stroke-arrow {
+  color: var(--coral);
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1;
+  animation: nudge 1.5s ease-in-out infinite;
+}
+
+@keyframes nudge {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(5px);
+    opacity: 1;
+  }
+}
+
 /* ---------- Sections ---------- */
 
 section {
   padding: 80px 0;
+}
+
+/* Offset anchor jumps (e.g. "How it works" → #live) so the sticky header
+   doesn't cover the top of the target section. */
+section[id] {
+  scroll-margin-top: 72px;
 }
 
 .section-head {
@@ -416,18 +693,26 @@ section {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 26px;
+  padding: 28px;
 }
 
 .card .ico {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
+  width: 50px;
+  height: 50px;
+  border-radius: 16px;
   display: grid;
   place-items: center;
-  background: linear-gradient(160deg, var(--accent-soft), #fff);
-  margin-bottom: 16px;
-  font-size: 1.4rem;
+  color: var(--coral-deep);
+  background: linear-gradient(150deg, #fff 8%, #ffe6db 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 107, 107, 0.16),
+    0 10px 20px -14px rgba(255, 107, 107, 0.75);
+  margin-bottom: 18px;
+}
+
+.card .ico svg {
+  width: 25px;
+  height: 25px;
 }
 
 .card h3 {
@@ -441,21 +726,79 @@ section {
   font-size: 0.98rem;
 }
 
-/* Two-column platform band */
+/* Two-column platform section: open on the page, not a boxed band. */
 .band {
-  background: var(--surface);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  background: transparent;
+}
+
+/* Decorative fresco-palette circles and squiggles (like the store feature
+   graphic) run behind everything from the platform section down to the footer.
+   Shapes sit behind the phones and show through the frosted glass cards. */
+.accented {
+  position: relative;
+  overflow: hidden; /* clip the shapes that bleed off the edges */
+}
+
+.accents-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.accents-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.accented > section {
+  position: relative;
+  z-index: 1;
 }
 
 .two {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 28px;
+  gap: 40px;
 }
 
+/* Borderless, centered: a phone above a frosted glass caption (like the showcase). */
 .two .card {
-  background: var(--parchment);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 22px;
+}
+
+.two .phone-sm {
+  margin: 0;
+}
+
+.platform-caption {
+  width: 100%;
+  max-width: 360px;
+  padding: 20px 24px 22px;
+}
+
+.platform-caption .ico {
+  margin: 0 auto 14px;
+}
+
+.platform-caption h3 {
+  margin: 0 0 8px;
+}
+
+.platform-caption p {
+  margin: 0;
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 0.98rem;
 }
 
 /* Steps */
@@ -751,6 +1094,33 @@ section {
   .toc ol {
     columns: 1;
   }
+  /* Showcase stacks into one column; the tools keep auto-cycling in place. */
+  .showcase-head {
+    padding: 64px 24px 4px;
+  }
+  .showcase-stage {
+    padding: 24px 0 56px;
+  }
+  .showcase-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+    align-items: center;
+  }
+  .live-demo {
+    order: -1;
+  }
+  .demo-item .phone {
+    width: 150px;
+  }
+  .tool-scroll {
+    width: 100%;
+    max-width: 320px;
+  }
+  .phone-sm {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 /* Respect reduced-motion: pin the hands together and drop the long track. */
@@ -775,5 +1145,21 @@ section {
   }
   html {
     scroll-behavior: auto;
+  }
+  /* Showcase: no sticky pin; videos stay on their posters, tools don't crossfade. */
+  .showcase-track {
+    height: auto;
+  }
+  .showcase-stage {
+    position: static;
+    height: auto;
+    top: 0;
+    padding: 56px 0;
+  }
+  .tool {
+    transition: none;
+  }
+  .stroke-arrow {
+    animation: none;
   }
 }

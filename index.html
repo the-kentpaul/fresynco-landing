@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fresynco Canvas: your wallpaper, drawn together</title>
+    <meta
+      name="description"
+      content="Fresynco Canvas turns your home screen into a shared canvas. Add friends with a short code, draw on each other's wallpapers, and watch strokes appear live."
+    />
+    <meta property="og:title" content="Fresynco Canvas" />
+    <meta
+      property="og:description"
+      content="Your wallpaper becomes a shared canvas. Draw with friends, live."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/png" href="assets/app-icon.png" />
+    <link rel="apple-touch-icon" href="assets/app-icon.png" />
+    <link rel="stylesheet" href="styles.css?v=10" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="./">
+          <img class="logo" src="assets/app-icon.png" alt="" aria-hidden="true" />
+          Fresynco Canvas
+        </a>
+        <nav class="nav">
+          <a href="#features">Features</a>
+          <a href="#live">How it works</a>
+          <a href="support">Support</a>
+          <a href="privacy">Privacy</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero: the two hands of the Creation of Adam converge as you scroll -->
+      <section class="hero">
+        <div class="hero-track">
+          <div class="hero-stage">
+            <div class="hero-content">
+              <span class="eyebrow">Live shared wallpaper</span>
+              <h1>Your wallpaper, drawn together.</h1>
+              <p class="lead">
+                Add friends with a short code and draw on each other's home
+                screens. Every stroke appears <strong>live</strong>: a true
+                live wallpaper on Android, a home-screen widget on iOS.
+              </p>
+              <div class="hero-actions">
+                <a class="btn btn-primary" href="#get">Get the app</a>
+                <a class="btn btn-ghost" href="#live">See how it works</a>
+              </div>
+              <p class="scroll-hint">
+                Scroll to connect<span aria-hidden="true">↓</span>
+              </p>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+              <img class="hand hand-adam" src="assets/hand-adam.png" alt="" />
+              <img class="hand hand-god" src="assets/hand-god.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Live showcase: scroll cycles the drawing tools on the left; the live
+           two-phone demo (one draws, the other's wallpaper repaints in sync) sits
+           in its own box on the right. Continues the fresco backdrop from the hero
+           into Features below. -->
+      <section id="live" class="showcase">
+        <div class="wrap showcase-head">
+          <span class="eyebrow">Live, together</span>
+          <h2>One paints. The other's wallpaper paints itself.</h2>
+          <p class="showcase-lead">
+            A friend draws in the app and every stroke lands on your home screen
+            as it happens. No refresh, no send button.
+          </p>
+        </div>
+        <div class="showcase-track">
+          <div class="showcase-stage">
+            <div class="wrap showcase-grid">
+              <!-- Left: scrolling crossfades the tools; each carries its caption -->
+              <div class="tool-scroll">
+                <figure class="tool active" data-tool="0">
+                  <div class="phone phone-tool"><div class="screen"><img src="assets/screens/tools/brush.jpg" alt="Brush picker with five brushes" /></div></div>
+                  <figcaption class="glass-card tool-cap">Five brushes, pick your style.</figcaption>
+                </figure>
+                <figure class="tool" data-tool="1">
+                  <div class="phone phone-tool"><div class="screen"><img src="assets/screens/tools/size.jpg" loading="lazy" alt="Brush size control" /></div></div>
+                  <figcaption class="glass-card tool-cap">Bold strokes or fine details.</figcaption>
+                </figure>
+                <figure class="tool" data-tool="2">
+                  <div class="phone phone-tool"><div class="screen"><img src="assets/screens/tools/color.jpg" loading="lazy" alt="Color picker" /></div></div>
+                  <figcaption class="glass-card tool-cap">Any color you can imagine.</figcaption>
+                </figure>
+                <figure class="tool" data-tool="3">
+                  <div class="phone phone-tool"><div class="screen"><img src="assets/screens/tools/presets.jpg" loading="lazy" alt="Palette presets" /></div></div>
+                  <figcaption class="glass-card tool-cap">A palette for every mood.</figcaption>
+                </figure>
+                <figure class="tool" data-tool="4">
+                  <div class="phone phone-tool"><div class="screen"><img src="assets/screens/tools/background.jpg" loading="lazy" alt="Background chooser" /></div></div>
+                  <figcaption class="glass-card tool-cap">Set the mood with a backdrop.</figcaption>
+                </figure>
+                <div class="tool-dots" aria-hidden="true">
+                  <span class="active"></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+              <!-- Right: the live demo in its own box -->
+              <div class="live-demo">
+                <figure class="demo-item">
+                  <div class="phone phone-ios">
+                    <div class="screen">
+                      <video class="sync-video" muted loop playsinline preload="none" poster="assets/video/draw-ios.jpg">
+                        <source src="assets/video/draw-ios.mp4" type="video/mp4" />
+                      </video>
+                    </div>
+                  </div>
+                  <figcaption class="glass-card">Drawing in the app</figcaption>
+                </figure>
+                <span class="stroke-arrow" aria-hidden="true">↓</span>
+                <figure class="demo-item">
+                  <div class="phone phone-android">
+                    <div class="screen">
+                      <video class="sync-video" muted loop playsinline preload="none" poster="assets/video/wallpaper-android.jpg">
+                        <source src="assets/video/wallpaper-android.mp4" type="video/mp4" />
+                      </video>
+                    </div>
+                  </div>
+                  <figcaption class="glass-card">Live on their wallpaper</figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features -->
+      <section id="features">
+        <div class="wrap">
+          <div class="section-head">
+            <h2>A canvas you share, not just a wallpaper</h2>
+            <p>
+              Everyone you add gets to draw. Every stroke lands on your home
+              screen in real time.
+            </p>
+          </div>
+          <div class="grid">
+            <div class="card">
+              <div class="ico">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4.5 13.5H11l-1 8.5L18.5 10.5H12L13 2Z" /></svg>
+              </div>
+              <h3>Live, not delayed</h3>
+              <p>
+                When a friend draws, your wallpaper repaints within
+                milliseconds. No refresh, no waiting.
+              </p>
+            </div>
+            <div class="card">
+              <div class="ico">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-1.8a3.6 3.6 0 0 0-3.6-3.6H6.6A3.6 3.6 0 0 0 3 19.2V21" /><circle cx="9" cy="7.6" r="3.6" /><path d="M21 21v-1.8a3.6 3.6 0 0 0-2.7-3.48" /><path d="M15.6 4.12a3.6 3.6 0 0 1 0 6.96" /></svg>
+              </div>
+              <h3>Draw together</h3>
+              <p>
+                Multiple friends can draw on the same canvas at once. Strokes
+                simply stack, so there's never a conflict.
+              </p>
+            </div>
+            <div class="card">
+              <div class="ico">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="16" r="3.4" /><path d="M10.4 13.6 20 4" /><path d="m16.5 7.5 2.4 2.4" /><path d="m18.7 5.3 2 2" /></svg>
+              </div>
+              <h3>Add by friend code</h3>
+              <p>
+                Share a short code to connect. Friendship is mutual, and only
+                friends can draw on your canvas.
+              </p>
+            </div>
+            <div class="card">
+              <div class="ico">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.6 11.4 18 3a2.55 2.55 0 0 1 3.6 3.6L13.2 15" /><path d="M7 14.6c-1.66 0-3 1.35-3 3.02C4 18.9 2.6 19 3 19.5c.9 1 2.3 1.7 3.7 1.7 2.1 0 3.8-1.72 3.8-3.86A3.02 3.02 0 0 0 7 14.6Z" /></svg>
+              </div>
+              <h3>Expressive brushes</h3>
+              <p>
+                Pick colors and brush styles and sketch anything: a doodle, a
+                note, a good-morning surprise.
+              </p>
+            </div>
+            <div class="card">
+              <div class="ico">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 20-3.5-3.5a2 2 0 0 1 0-2.8l8.8-8.8a2 2 0 0 1 2.8 0l4.5 4.5a2 2 0 0 1 0 2.8L13.4 20Z" /><path d="M21 20H8" /><path d="m5.5 12.5 6 6" /></svg>
+              </div>
+              <h3>You stay in control</h3>
+              <p>
+                It's your canvas. Clear it whenever you like. Only the owner
+                can wipe it clean.
+              </p>
+            </div>
+            <div class="card">
+              <div class="ico">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 5 6v5.6c0 4 2.9 6.8 7 8.2 4.1-1.4 7-4.2 7-8.2V6l-7-2.8Z" /><path d="m9.3 11.8 1.9 1.9 3.6-3.7" /></svg>
+              </div>
+              <h3>Light on data</h3>
+              <p>
+                No password to remember. We keep what's needed to sync your
+                canvas, and nothing we don't.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Decorative fresco accents run behind everything from here to the footer -->
+      <div class="accented">
+        <div class="accents-bg" aria-hidden="true">
+          <img src="assets/section-accents.svg?v=13" alt="" loading="lazy" />
+        </div>
+
+      <!-- Platforms -->
+      <section class="band">
+        <div class="wrap">
+          <div class="section-head">
+            <h2>Built for each home screen</h2>
+            <p>
+              We use the right native surface on each platform so it feels at
+              home.
+            </p>
+          </div>
+          <div class="two">
+            <div class="card">
+              <div class="phone phone-sm">
+                <div class="screen">
+                  <img
+                    src="assets/screens/wallpaper-android.jpg"
+                    loading="lazy"
+                    alt="Fresynco live wallpaper on an Android home screen"
+                  />
+                </div>
+              </div>
+              <div class="glass-card platform-caption">
+                <div class="ico">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 9v8.5A1.5 1.5 0 0 0 7.5 19H8v2.5a1.5 1.5 0 0 0 3 0V19h2v2.5a1.5 1.5 0 0 0 3 0V19h.5a1.5 1.5 0 0 0 1.5-1.5V9H6Zm-2.5 0A1.5 1.5 0 0 0 2 10.5v5a1.5 1.5 0 0 0 3 0v-5A1.5 1.5 0 0 0 3.5 9Zm17 0a1.5 1.5 0 0 0-1.5 1.5v5a1.5 1.5 0 0 0 3 0v-5A1.5 1.5 0 0 0 20.5 9ZM15.5 2.3l1.1-1.1a.4.4 0 0 0-.55-.55l-1.25 1.24A6 6 0 0 0 12 1.2a6 6 0 0 0-2.8.69L7.95.65a.4.4 0 0 0-.55.55l1.1 1.1A5.6 5.6 0 0 0 6.2 7h11.6a5.6 5.6 0 0 0-2.3-4.7ZM9.8 5.1a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8Zm4.4 0a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8Z" /></svg>
+                </div>
+                <h3>Android: true live wallpaper</h3>
+                <p>
+                  Fresynco runs as a live wallpaper that owns your home-screen
+                  surface and repaints the instant a friend draws.
+                </p>
+              </div>
+            </div>
+            <div class="card">
+              <div class="phone phone-sm">
+                <div class="screen">
+                  <img
+                    src="assets/screens/widget-ios.jpg"
+                    loading="lazy"
+                    alt="Fresynco widget on an iOS home screen"
+                  />
+                </div>
+              </div>
+              <div class="glass-card platform-caption">
+                <div class="ico">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" /></svg>
+                </div>
+                <h3>iOS: home-screen widget</h3>
+                <p>
+                  Add the Fresynco widget to your home screen. It updates live
+                  while the app is open and refreshes in the background otherwise.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How it works -->
+      <section id="how">
+        <div class="wrap">
+          <div class="section-head">
+            <h2>Up and running in a minute</h2>
+            <p>Three steps and your friends can start drawing.</p>
+          </div>
+          <div class="steps">
+            <div class="step">
+              <h3>Pick a username</h3>
+              <p>
+                Choose a name and you're in. No password, no email signup
+                required.
+              </p>
+            </div>
+            <div class="step">
+              <h3>Set your canvas</h3>
+              <p>
+                Set Fresynco as your live wallpaper on Android, or add the
+                widget on iOS.
+              </p>
+            </div>
+            <div class="step">
+              <h3>Share your code</h3>
+              <p>
+                Send your friend code. Once they add you, draw on each other's
+                screens, live.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section id="get">
+        <div class="wrap">
+          <div class="cta">
+            <h2>Make your home screen something you share</h2>
+            <p>Download Fresynco Canvas and add your first friend today.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#">Download on the App Store</a>
+              <a class="btn btn-ghost" href="#">Get it on Google Play</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <a class="brand" href="./">
+          <img class="logo" src="assets/app-icon.png" alt="" aria-hidden="true" />
+          Fresynco Canvas
+        </a>
+        <nav class="footer-links">
+          <a href="./">Home</a>
+          <a href="support">Support</a>
+          <a href="privacy">Privacy Policy</a>
+          <a href="terms">Terms &amp; Conditions</a>
+          <a href="mailto:kent@kenttechinc.com">Contact</a>
+        </nav>
+        <p class="copyright">
+          © 2026 Kent Tech Inc. Fresynco Canvas. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Drive the hands-converging animation from scroll position.
+      // --p goes 0 (hands apart) → 1 (fingertips meeting) across the hero track.
+      (function () {
+        var reduce = window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
+        if (reduce) return; // CSS pins the hands together for reduced motion
+
+        var art = document.querySelector(".hero-art");
+        if (!art) return;
+        var root = document.documentElement;
+        var ticking = false;
+
+        function update() {
+          ticking = false;
+          var rect = art.getBoundingClientRect();
+          var vh = window.innerHeight || 1;
+          // Drive convergence from the fresco panel rising into view: 0 when its
+          // top is at the bottom of the screen (hands off-screen) → 1 a bit
+          // before it reaches the top, so the hands meet earlier in the scroll
+          // (while the panel is still ~25% down) rather than only at the very top.
+          var p = Math.min(Math.max(((vh - rect.top) / vh) * 1.25, 0), 1);
+          root.style.setProperty("--p", p.toFixed(4));
+        }
+
+        function onScroll() {
+          if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(update);
+          }
+        }
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onScroll);
+        update();
+      })();
+
+      // Live showcase: the drawing tools on the left auto-cycle (drifting left to
+      // right and fading out), and the two phone videos on the right play in sync
+      // (they are the same timelapse, so their strokes line up exactly). Both run
+      // only while the showcase is on screen.
+      (function () {
+        var reduce = window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+        var showcase = document.querySelector(".showcase");
+        var tools = Array.prototype.slice.call(
+          document.querySelectorAll(".tool-scroll .tool")
+        );
+        var dots = Array.prototype.slice.call(
+          document.querySelectorAll(".tool-dots span")
+        );
+        var vids = Array.prototype.slice.call(
+          document.querySelectorAll(".sync-video")
+        );
+
+        var n = tools.length,
+          active = 0,
+          timer = null;
+
+        function show(next) {
+          if (next === active || !tools.length) return;
+          for (var i = 0; i < n; i++) {
+            // The current screen slides off to the right; the next enters left.
+            tools[i].classList.toggle("active", i === next);
+            tools[i].classList.toggle("leaving", i === active && i !== next);
+            if (dots[i]) dots[i].classList.toggle("active", i === next);
+          }
+          active = next;
+        }
+
+        function startTools() {
+          if (!reduce && !timer && n > 1) {
+            timer = setInterval(function () {
+              show((active + 1) % n);
+            }, 3800);
+          }
+        }
+        function stopTools() {
+          if (timer) {
+            clearInterval(timer);
+            timer = null;
+          }
+        }
+
+        // Keep the Android clip snapped to the iOS clip if they drift after a loop.
+        var lead = vids[0],
+          follow = vids[1];
+        if (lead && follow) {
+          lead.addEventListener("timeupdate", function () {
+            if (Math.abs(lead.currentTime - follow.currentTime) > 0.15) {
+              follow.currentTime = lead.currentTime;
+            }
+          });
+        }
+        function playVids() {
+          if (reduce || !lead || !follow) return;
+          follow.currentTime = lead.currentTime;
+          vids.forEach(function (v) {
+            var pr = v.play();
+            if (pr && pr.catch) pr.catch(function () {});
+          });
+        }
+        function pauseVids() {
+          vids.forEach(function (v) {
+            v.pause();
+          });
+        }
+
+        if (showcase && "IntersectionObserver" in window) {
+          var io = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (e) {
+                if (e.isIntersecting) {
+                  startTools();
+                  playVids();
+                } else {
+                  stopTools();
+                  pauseVids();
+                }
+              });
+            },
+            { threshold: 0.2 }
+          );
+          io.observe(showcase);
+        } else {
+          startTools();
+          playVids();
+        }
+      })();
+    </script>
+  </body>
+</html>
